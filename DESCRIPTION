@@ -1,0 +1,17 @@
+Package: mread.yaml
+Type: Package
+Title: Model Specification Using 'yaml'
+Version: 0.0.0
+Author: Kyle Baron
+Maintainer: Kyle Baron <kylebtwin@imap.cc>
+Description: More about what it does (maybe more than one line)
+    Use four spaces when indenting paragraphs within the Description.
+License: What license is it under?
+Encoding: UTF-8
+LazyData: true
+Imports:
+  yaml, 
+  dplyr, 
+  purrr, 
+  mrgsolve
+RoxygenNote: 7.0.2
