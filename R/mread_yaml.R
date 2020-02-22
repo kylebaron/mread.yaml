@@ -6,14 +6,12 @@ block_sep <- "\n//-------------------------------\n"
 valid_names <- c("value", "label", "name", "unit", "reference")
 re <- "(.*?)(<*-+>)(.*)"
 
-#' @export
 mread_yaml <- function(file, yaml_dir = '.', project = yaml_dir, ...) {
   cpp <- yaml_to_cfile(file=file,yaml_dir=yaml_dir,project=project)
   stopifnot(file_writeable(project))
   mread_cache(cpp, project = project, ...)
 }
 
-#' @export
 mread_yaml_ex <- function(file,project=tempdir(),...) {
   y_dir <- system.file("examples", package="mread.yaml")
   mread_yaml(file,yaml_dir=y_dir,project=project,...)

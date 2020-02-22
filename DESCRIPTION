@@ -6,15 +6,15 @@ Author: Kyle Baron
 Maintainer: Kyle Baron <kylebtwin@imap.cc>
 Description: More about what it does (maybe more than one line)
     Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+License: GPL (>=2)
 Encoding: UTF-8
 LazyData: true
 Imports:
   yaml, 
-  dplyr, 
   purrr, 
   mrgsolve, 
-  dplyr
+  dplyr,
+  stringr
 Suggests:
   testthat, 
   roxygen2

@@ -4,7 +4,7 @@ PACKAGE=mread.yaml
 VERSION=$(shell grep Version DESCRIPTION |awk '{print $$2}')
 TARBALL=${PACKAGE}_${VERSION}.tar.gz
 PKGDIR=.
-CHKDIR=Rchecks
+CHKDIR=.
 
 ## Set libPaths:
 ## export R_LIBS=${LIBDIR}
@@ -72,11 +72,9 @@ install-build:
 	R CMD INSTALL --build --install-tests ${TARBALL}
 
 check:
-	make house
 	make doc
 	make build
 	R CMD check ${TARBALL} -o ${CHKDIR} --no-manual
-	make unit
 
 qcheck:
 	make doc
