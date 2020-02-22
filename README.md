@@ -7,8 +7,13 @@
 
 <!-- badges: end -->
 
-mread.yaml provides alternate model specification formats, primarily
-based on yaml.
+**The package name will probably change with time**. For now,
+experimenting with alternate methods for model specification. I’m trying
+to leverage existing markup languages (i.e. yaml) to standardize input a
+bit and make writing the model more powerful and intuitive.
+
+There is a 100% yaml model specification format in the works. For now,
+trying to refine specification of ODE models as a series of reactions.
 
 ## Installation
 
@@ -91,8 +96,8 @@ mod
 . 
 . ------------  source: two_cmt_model.cpp  ------------
 . 
-.   project: /private/var/fol.../T/RtmpHMZmRC
-.   shared object: two_cmt_model.cpp-so-2f0cc2f54d6 
+.   project: /private/var/fol.../T/RtmpzGwVfu
+.   shared object: two_cmt_model.cpp-so-306b4e1e01f8 
 . 
 .   time:          start: 0 end: 48 delta: 0.1
 .                  add: <none>
@@ -114,7 +119,8 @@ mrgsim(mod, ev(amt = 100)) %>% plot
 <img src="man/figures/README-unnamed-chunk-6-1.png" width="100%" />
 
 In fact, all `mread_rxn()` does, is parse the reactions and write that
-math as ODEs
+math as ODEs, creating this `.cpp` file that gets handled but regular
+old `mread()`
 
 ``` c
 [ PROB ]

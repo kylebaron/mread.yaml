@@ -18,8 +18,13 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 <!-- badges: end -->
 
-mread.yaml provides alternate model specification formats, primarily based 
-on yaml. 
+__The package name will probably change with time__.  For now, experimenting
+with alternate methods for model specification.  I'm trying to leverage existing
+markup languages (i.e. yaml) to standardize input a bit and make writing the
+model more powerful and intuitive.
+
+There is a 100% yaml model specification format in the works.  For now, trying
+to refine specification of ODE models as a series of reactions.
 
 ## Installation
 
@@ -77,7 +82,7 @@ mrgsim(mod, ev(amt = 100)) %>% plot
 
 
 In fact, all `mread_rxn()` does, is parse the reactions and write that math 
-as ODEs
+as ODEs, creating this `.cpp` file that gets handled but regular old `mread()`
 
 ```{c, eval=FALSE, code = mod@code}
 
