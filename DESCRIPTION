@@ -15,5 +15,8 @@ Imports:
   purrr, 
   mrgsolve, 
   dplyr
+Suggests:
+  testthat, 
+  roxygen2
 Roxygen: list(markdown = TRUE) 
 RoxygenNote: 7.0.2

@@ -35,7 +35,8 @@ pkgdown:
 	touch ../../mrgsolve/docs/.nojekyll
 
 test-all:
-	Rscript inst/maintenance/tests.R
+	export R_LIBS=$(LIBDIR)
+	Rscript -e 'testthat::test_dir("tests/testthat/")'
 
 cran:
 	make house
