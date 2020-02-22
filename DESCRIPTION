@@ -13,5 +13,7 @@ Imports:
   yaml, 
   dplyr, 
   purrr, 
-  mrgsolve
+  mrgsolve, 
+  dplyr
+Roxygen: list(markdown = TRUE) 
 RoxygenNote: 7.0.2
