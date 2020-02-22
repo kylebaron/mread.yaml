@@ -1,7 +1,7 @@
 Package: mread.yaml
 Type: Package
 Title: Model Specification Using 'yaml'
-Version: 0.0.0
+Version: 0.0.1
 Author: Kyle Baron
 Maintainer: Kyle Baron <kylebtwin@imap.cc>
 Description: More about what it does (maybe more than one line)
