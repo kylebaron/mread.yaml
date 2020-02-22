@@ -109,8 +109,8 @@ mod
 . 
 . ------------  source: two_cmt_model.cpp  ------------
 . 
-.   project: /private/var/fol.../T/RtmpYdZZrS
-.   shared object: two_cmt_model.cpp-so-32eb6bea31cb 
+.   project: /private/var/fol.../T/RtmpegLo2U
+.   shared object: two_cmt_model.cpp-so-357d6be4c029 
 . 
 .   time:          start: 0 end: 48 delta: 0.1
 .                  add: <none>
@@ -171,4 +171,96 @@ dxdt_periph =  J03;
 //-------------------------------
 
  
+```
+
+# Under the hood
+
+## Parse reactions
+
+``` r
+reactions <- c("a --> b", "c+d <--> e")
+```
+
+``` r
+mread.yaml:::parse_species(reactions)
+.        rxn lhs arrow rhs
+. 1    a-->b   a   -->   b
+. 2 c+d<-->e c+d  <-->   e
+```
+
+## Handle a series of reactions
+
+``` r
+x <- list(
+  list(species = reactions[1], form = "xyx", label = "the first reaction"), 
+  list(species = reactions[2], form = "abc", label = "the second reaction")
+)
+```
+
+``` r
+mread.yaml:::parse_reactions(x)
+. $species
+.        rxn lhs arrow rhs formula   J
+. 1    a-->b   a   -->   b     xyx J01
+. 2 c+d<-->e c+d  <-->   e     abc J02
+. 
+. $lhs
+. $lhs[[1]]
+. [1] "a"
+. 
+. $lhs[[2]]
+. [1] "c" "d"
+. 
+. 
+. $rhs
+. $rhs[[1]]
+. [1] "b"
+. 
+. $rhs[[2]]
+. [1] "e"
+. 
+. 
+. $j_names
+. [1] "J01" "J02"
+. 
+. $label
+. [1] "the first reaction"  "the second reaction"
+```
+
+## Turn reactions into ODE
+
+``` r
+mread.yaml:::reactions_to_ode(x)
+. $code
+. [1] "double J01 = xyx;" "double J02 = abc;" " "                
+. [4] "dxdt_a = -J01;"    "dxdt_b =  J01;"    "dxdt_c = -J02;"   
+. [7] "dxdt_d = -J02;"    "dxdt_e =  J02;"   
+. 
+. $ans
+. $ans$species
+.        rxn lhs arrow rhs formula   J
+. 1    a-->b   a   -->   b     xyx J01
+. 2 c+d<-->e c+d  <-->   e     abc J02
+. 
+. $ans$lhs
+. $ans$lhs[[1]]
+. [1] "a"
+. 
+. $ans$lhs[[2]]
+. [1] "c" "d"
+. 
+. 
+. $ans$rhs
+. $ans$rhs[[1]]
+. [1] "b"
+. 
+. $ans$rhs[[2]]
+. [1] "e"
+. 
+. 
+. $ans$j_names
+. [1] "J01" "J02"
+. 
+. $ans$label
+. [1] "the first reaction"  "the second reaction"
 ```

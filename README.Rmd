@@ -100,3 +100,35 @@ as ODEs, creating this `.cpp` file that gets handled but regular old `mread()`
 
 ```
 
+# Under the hood
+
+
+## Parse reactions
+```{r}
+reactions <- c("a --> b", "c+d <--> e")
+```
+
+```{r}
+mread.yaml:::parse_species(reactions)
+```
+
+## Handle a series of reactions
+
+```{r}
+x <- list(
+  list(species = reactions[1], form = "xyx", label = "the first reaction"), 
+  list(species = reactions[2], form = "abc", label = "the second reaction")
+)
+```
+
+```{r}
+mread.yaml:::parse_reactions(x)
+```
+
+
+## Turn reactions into ODE
+
+```{r}
+mread.yaml:::reactions_to_ode(x)
+```
+
