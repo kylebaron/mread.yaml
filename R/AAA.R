@@ -1,5 +1,5 @@
 #' @importFrom yaml yaml.load_file yaml.load
-#' @importFrom mrgsolve mread_cache modelparse
+#' @importFrom mrgsolve mread_cache modelparse mread
 #' @importFrom tools file_path_sans_ext
 #' @importFrom purrr imap map map_dbl map_chr imap_dfr flatten_chr
 #' @importFrom stringr str_match

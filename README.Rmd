@@ -1,0 +1,85 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = ".",
+  fig.path = "man/figures/README-",
+  out.width = "100%" , message = FALSE
+)
+```
+
+# mread.yaml
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+mread.yaml provides alternate model specification formats, primarily based 
+on yaml. 
+
+## Installation
+
+``` r
+# install.packages("devtools")
+devtools::install_github("kylebaron/mread.yaml")
+```
+
+
+## Example
+
+### Setup
+
+
+```{r}
+library(mread.yaml)
+library(dplyr)
+library(mrgsolve)
+```
+
+
+Read some input code
+```{r}
+examp <- system.file("examples", "two_cmt_model.cpp", package = "mread.yaml")
+```
+
+
+This looks identical to the regular model specification file, but rather than 
+writing differential equations, we write the model in reaction notation.  
+```{yaml,eval=FALSE, code = readLines(examp)}
+```
+
+In this simple example, we write the model as a series of fluxes:
+
+- absorption from the gut to the central compartment (1)
+- elimination (2)
+- transfer between the central and peripheral compartments (3)
+
+mread.yaml provides a function to read and parse this type of model specification
+file and return a model object just like [mrgsolve::mread].
+
+```{r example}
+mod <- mread_rxn(examp, delta = 0.1, end = 48)
+```
+
+Once the model is loaded, it functions just like you had written it using ODEs
+
+```{r}
+mod
+```
+
+```{r}
+mrgsim(mod, ev(amt = 100)) %>% plot
+```
+
+
+In fact, all `mread_rxn()` does, is parse the reactions and write that math 
+as ODEs
+
+```{c, eval=FALSE, code = mod@code}
+
+```
+

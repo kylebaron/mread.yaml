@@ -1,3 +1,6 @@
+test.R
+*.tar.gz
+mread.yaml.Rproj
 .Rproj.user
 .Rhistory
 .RData
