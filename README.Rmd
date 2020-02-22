@@ -51,20 +51,32 @@ Read some input code
 examp <- system.file("examples", "two_cmt_model.cpp", package = "mread.yaml")
 ```
 
+We are focusing on this __new model specification block__:
 
-This looks identical to the regular model specification file, but rather than 
-writing differential equations, we write the model in reaction notation.  
-```{yaml,eval=FALSE, code = readLines(examp)}
+```{r,include = FALSE}
+mod <- modelparse(readLines(examp))
+blocks <- mod[c("ODE_ASSIGNMENTS", "REACTIONS")]
 ```
 
-In this simple example, we write the model as a series of fluxes:
+
+```{r,code = c("[ reactions ]"," ", blocks[[2]]),eval=FALSE}
+
+```
+
+In the `[ reactions ]` block of this simple model we, write the model in 
+reaction / arrow notation as a series of fluxes:
 
 - absorption from the gut to the central compartment (1)
 - elimination (2)
 - transfer between the central and peripheral compartments (3)
 
+The remaining parts of the model specification file look similar to what we 
+usually see:
+```{yaml,eval=FALSE, code = readLines(examp)}
+```
+
 mread.yaml provides a function to read and parse this type of model specification
-file and return a model object just like [mrgsolve::mread].
+file and return a model object just like `mrgsolve::mread()`.
 
 ```{r example}
 mod <- mread_rxn(examp, delta = 0.1, end = 48)

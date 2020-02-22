@@ -39,9 +39,28 @@ code
 examp <- system.file("examples", "two_cmt_model.cpp", package = "mread.yaml")
 ```
 
-This looks identical to the regular model specification file, but rather
-than writing differential equations, we write the model in reaction
-notation.
+We are focusing on this **new model specification block**:
+
+``` r
+[ reactions ]
+ 
+- species: gut --> cent
+  form: ka * gut
+- species: cent --> NULL
+  form: cl * conc
+- species: cent <--> periph
+  form: k12 * cent - k21 * periph
+```
+
+In the `[ reactions ]` block of this simple model we, write the model in
+reaction / arrow notation as a series of fluxes:
+
+  - absorption from the gut to the central compartment (1)
+  - elimination (2)
+  - transfer between the central and peripheral compartments (3)
+
+The remaining parts of the model specification file look similar to what
+we usually see:
 
 ``` yaml
 [ prob ]
@@ -73,15 +92,9 @@ double conc = cent/v1;
 [capture] k10
 ```
 
-In this simple example, we write the model as a series of fluxes:
-
-  - absorption from the gut to the central compartment (1)
-  - elimination (2)
-  - transfer between the central and peripheral compartments (3)
-
 mread.yaml provides a function to read and parse this type of model
 specification file and return a model object just like
-\[mrgsolve::mread\].
+`mrgsolve::mread()`.
 
 ``` r
 mod <- mread_rxn(examp, delta = 0.1, end = 48)
@@ -96,8 +109,8 @@ mod
 . 
 . ------------  source: two_cmt_model.cpp  ------------
 . 
-.   project: /private/var/fol.../T/RtmpzGwVfu
-.   shared object: two_cmt_model.cpp-so-306b4e1e01f8 
+.   project: /private/var/fol.../T/RtmpYdZZrS
+.   shared object: two_cmt_model.cpp-so-32eb6bea31cb 
 . 
 .   time:          start: 0 end: 48 delta: 0.1
 .                  add: <none>
@@ -116,7 +129,7 @@ mod
 mrgsim(mod, ev(amt = 100)) %>% plot
 ```
 
-<img src="man/figures/README-unnamed-chunk-6-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-8-1.png" width="100%" />
 
 In fact, all `mread_rxn()` does, is parse the reactions and write that
 math as ODEs, creating this `.cpp` file that gets handled but regular
