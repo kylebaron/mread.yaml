@@ -26,7 +26,9 @@ render_yaml_reactions <- function(mod) {
   if(is.null(mod$REACTIONS)) {
     stop("model code must contain a 'REACTIONS' block", call.=FALSE)
   }
-  parsed <- try_yaml(paste0(mod$REACTIONS,collapse = "\n"))
+  rxn <- mod$REACTIONS
+  stopifnot(is.character(rxn))
+  parsed <- try_yaml(paste0(rxn,collapse = "\n"))
   ans <- make_ode(list(reactions = parsed))
   ans[1] <- ""
   mod$REACTIONS <- NULL

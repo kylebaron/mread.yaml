@@ -4,7 +4,6 @@ eq_pad <- function(x) formatC(x,width = max(nchar(x)),flag='-')
 
 block_sep <- "\n//-------------------------------\n"
 valid_names <- c("value", "label", "name", "unit", "reference")
-re <- "(.*?)(<*-+>)(.*)"
 
 mread_yaml <- function(file, yaml_dir = '.', project = yaml_dir, ...) {
   cpp <- yaml_to_cfile(file=file,yaml_dir=yaml_dir,project=project)

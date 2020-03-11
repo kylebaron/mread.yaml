@@ -4,7 +4,7 @@
 \alias{parse_species}
 \title{Parse species}
 \usage{
-parse_species(species)
+parse_species(species, re = species_re)
 }
 \description{
 Parse species

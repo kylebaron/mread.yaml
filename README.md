@@ -44,11 +44,14 @@ We are focusing on this **new model specification block**:
 ``` r
 [ reactions ]
  
-- species: gut --> cent
+- label: absorption from dosing compartment
+  species: gut --> cent
   form: ka * gut
-- species: cent --> NULL
+- label: elimination from central compartment
+  species: cent --> NULL
   form: cl * conc
-- species: cent <--> periph
+- label: distribution to peripheral compartment
+  species: cent <--> periph
   form: k12 * cent - k21 * periph
 ```
 
@@ -80,11 +83,14 @@ double k21 = q/v2;
 double conc = cent/v1;
 
 [ reactions ]
-- species: gut --> cent
+- label: absorption from dosing compartment
+  species: gut --> cent
   form: ka * gut
-- species: cent --> NULL
+- label: elimination from central compartment
+  species: cent --> NULL
   form: cl * conc
-- species: cent <--> periph
+- label: distribution to peripheral compartment
+  species: cent <--> periph
   form: k12 * cent - k21 * periph
 
 [ table ] capture cp = cent/v1;
@@ -109,8 +115,8 @@ mod
 . 
 . ------------  source: two_cmt_model.cpp  ------------
 . 
-.   project: /private/var/fol.../T/Rtmpf1JVEe
-.   shared object: two_cmt_model.cpp-so-36123d864963 
+.   project: /private/var/fol.../T/RtmpajOFlt
+.   shared object: two_cmt_model.cpp-so-a5124f1d0622 
 . 
 .   time:          start: 0 end: 48 delta: 0.1
 .                  add: <none>

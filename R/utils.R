@@ -17,3 +17,17 @@ try_yaml_file <- function(file,context="try_yaml_file") {
 
 file_writeable <- function(x) file.access(x,2)==0
 
+is_named_chr_list <- function(x) {
+  a <- is.list(x)
+  nms <- names(x)
+  b <- is.character(nms) && all(nzchar(nms))
+  c <- all(sapply(x,inherits,"character"))
+  all(a,b,c)
+}
+
+is_chr_list <- function(x) {
+  a <- is.list(x)
+  c <- all(vapply(x,inherits,TRUE,"character"))
+  all(a,c)
+}
+
